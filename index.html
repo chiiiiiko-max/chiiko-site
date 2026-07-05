@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>chiiko illust | 見るたび、心がはずむ。</title>
+<meta name="description" content="透明感×女性向けイラスト。挿絵・PR漫画・原画制作のご相談を受け付けています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kinari: #F5F0E8;
+    --beige: #E3D5C0;
+    --greige: #CFC4B4;
+    --pink: #D7A9AE;
+    --lavender: #BDB4D4;
+    --charcoal: #4B4845;
+    --text-soft: #6B6662;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 300;
+    background: var(--kinari);
+    color: var(--charcoal);
+    line-height: 1.9;
+    letter-spacing: 0.06em;
+  }
+  .en {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+  }
+
+  /* ── header ── */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 28px;
+    background: rgba(245, 240, 232, 0.88);
+    backdrop-filter: blur(8px);
+  }
+  .logo { font-size: 1.05rem; letter-spacing: 0.3em; color: var(--charcoal); text-decoration: none; }
+  nav a {
+    font-size: 0.78rem; color: var(--text-soft); text-decoration: none; margin-left: 22px;
+  }
+  nav a:hover { color: var(--pink); }
+
+  /* ── hero ── */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 120px 24px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before, .hero::after {
+    content: ""; position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.45; z-index: 0;
+  }
+  .hero::before { width: 420px; height: 420px; background: var(--pink); top: -80px; right: -120px; }
+  .hero::after { width: 380px; height: 380px; background: var(--lavender); bottom: -100px; left: -110px; }
+  .hero > * { position: relative; z-index: 1; }
+  .hero .en-title { font-size: clamp(2.2rem, 6vw, 3.6rem); color: var(--charcoal); }
+  .hero .catch { margin-top: 26px; font-size: clamp(1.05rem, 3vw, 1.35rem); font-weight: 400; }
+  .hero .sub { margin-top: 14px; font-size: 0.85rem; color: var(--text-soft); }
+  .hero .bubble { font-size: 1.2rem; margin-top: 30px; }
+
+  /* ── sections ── */
+  section { max-width: 960px; margin: 0 auto; padding: 90px 24px; }
+  .sec-title { text-align: center; margin-bottom: 10px; font-size: 1.7rem; color: var(--charcoal); }
+  .sec-sub { text-align: center; font-size: 0.8rem; color: var(--text-soft); margin-bottom: 54px; }
+
+  /* ── works ── */
+  .cat-label {
+    display: inline-block; font-size: 0.82rem; font-weight: 400;
+    padding: 4px 18px; border-radius: 999px; margin: 34px 0 18px;
+    background: var(--beige); color: var(--charcoal);
+  }
+  .cat-label.pink { background: #EEDADC; }
+  .cat-label.lav { background: #E2DDEE; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .work {
+    aspect-ratio: 4 / 5; border-radius: 14px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 12px;
+    background: linear-gradient(150deg, #fff 0%, var(--kinari) 55%, var(--beige) 100%);
+    box-shadow: 0 4px 18px rgba(75, 72, 69, 0.07);
+  }
+  .work.p2 { background: linear-gradient(150deg, #fff 0%, #F3E4E6 60%, var(--pink) 130%); }
+  .work.p3 { background: linear-gradient(150deg, #fff 0%, #E9E5F2 60%, var(--lavender) 130%); }
+  .work .ph { font-size: 1.6rem; opacity: 0.55; }
+  .work .ph-note { font-size: 0.72rem; color: var(--text-soft); margin-top: 8px; }
+  .work .cap {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    font-size: 0.72rem; padding: 8px; color: var(--charcoal);
+    background: rgba(255,255,255,0.75);
+  }
+  .sold {
+    position: absolute; top: 10px; right: 10px;
+    font-size: 0.65rem; letter-spacing: 0.15em;
+    background: var(--charcoal); color: var(--kinari);
+    padding: 3px 10px; border-radius: 999px;
+  }
+
+  /* ── profile ── */
+  .profile { background: #fff; }
+  .profile-inner { display: flex; gap: 40px; align-items: center; max-width: 760px; margin: 0 auto; }
+  .face {
+    flex: 0 0 150px; width: 150px; height: 150px; border-radius: 50%;
+    background: linear-gradient(140deg, var(--pink), var(--lavender));
+    display: flex; justify-content: center; align-items: center;
+    font-size: 2rem; color: #fff;
+  }
+  .profile-text p { font-size: 0.9rem; margin-bottom: 12px; }
+  .profile-text .name { font-size: 1.15rem; font-weight: 500; margin-bottom: 16px; }
+
+  /* ── contact ── */
+  .contact { text-align: center; }
+  .contact p { font-size: 0.9rem; max-width: 560px; margin: 0 auto 30px; }
+  .btn {
+    display: inline-block; margin: 6px 8px; padding: 14px 38px;
+    border-radius: 999px; text-decoration: none; font-size: 0.88rem;
+    background: var(--pink); color: #fff; transition: opacity 0.2s;
+  }
+  .btn.alt { background: var(--lavender); }
+  .btn:hover { opacity: 0.82; }
+
+  footer {
+    text-align: center; padding: 40px 20px 50px;
+    font-size: 0.72rem; color: var(--text-soft);
+    background: var(--beige);
+  }
+  footer .en { font-size: 0.85rem; letter-spacing: 0.3em; margin-bottom: 6px; }
+
+  @media (max-width: 640px) {
+    nav a { margin-left: 14px; font-size: 0.72rem; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .profile-inner { flex-direction: column; text-align: center; }
+    section { padding: 64px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo en" href="#top">chiiko illust</a>
+  <nav>
+    <a href="#works" class="en">WORKS</a>
+    <a href="#profile" class="en">PROFILE</a>
+    <a href="#contact" class="en">CONTACT</a>
+  </nav>
+</header>
+
+<div class="hero" id="top">
+  <div class="en en-title">chiiko illust</div>
+  <div class="catch">見るたび、心がはずむ。</div>
+  <div class="sub">透明感 × 女性向けイラスト｜挿絵・PR漫画・原画</div>
+  <div class="bubble">🫧</div>
+</div>
+
+<section id="works">
+  <h2 class="sec-title en">WORKS</h2>
+  <p class="sec-sub">おしごと実績・作品</p>
+
+  <div class="cat-label pink">挿絵・イラスト制作</div>
+  <div class="grid">
+    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵1<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
+    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵2<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
+    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵3<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
+  </div>
+
+  <div class="cat-label">原画・展示</div>
+  <div class="grid">
+    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画1<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
+    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画2<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
+    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画3<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
+  </div>
+
+  <div class="cat-label lav">漫画・PR漫画</div>
+  <div class="grid">
+    <div class="work p3"><span class="ph">💭</span><span class="ph-note">4コマ1<br>（画像あとで入れ替え）</span><span class="cap">共感4コマ</span></div>
+    <div class="work p3"><span class="ph">💭</span><span class="ph-note">4コマ2<br>（画像あとで入れ替え）</span><span class="cap">共感4コマ</span></div>
+    <div class="work p3"><span class="ph">📖</span><span class="ph-note">PR漫画 2P<br>（画像あとで入れ替え）</span><span class="cap">PR漫画サンプル</span></div>
+  </div>
+</section>
+
+<section class="profile" id="profile" style="max-width:none;">
+  <h2 class="sec-title en">PROFILE</h2>
+  <p class="sec-sub">プロフィール</p>
+  <div class="profile-inner">
+    <div class="face">🫧</div>
+    <div class="profile-text">
+      <p class="name">ちいこ<span class="en" style="font-size:0.85rem; margin-left:10px;">/ chiiko</span></p>
+      <p>大阪を拠点に活動するイラストレーター。水彩・アナログ画材とデジタルの両方で、透明感のある女の子や日常の小さなときめきを描いています。</p>
+      <p>「見ると気分があがって、今日がちょっといい日になる」絵をお届けすることがモットー。挿絵・PR漫画・原画制作のご依頼を受け付けています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="sec-title en">CONTACT</h2>
+  <p class="sec-sub">おしごとのご相談</p>
+  <p>挿絵・PR漫画・イラスト制作のご依頼やご相談は、下記よりお気軽にご連絡ください。ご依頼内容・希望納期・ご予算の目安を添えていただけるとスムーズです。</p>
+  <a class="btn" href="https://www.instagram.com/chiikoillust/" target="_blank" rel="noopener">Instagram DMで相談する</a>
+  <a class="btn alt" href="#" onclick="alert('公開時にフォームかメールを設定します'); return false;">メールで相談する（準備中）</a>
+</section>
+
+<footer>
+  <div class="en">chiiko illust</div>
+  <div>© 2026 chiiko</div>
+</footer>
+
+</body>
+</html>
