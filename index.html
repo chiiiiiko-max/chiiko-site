@@ -7,7 +7,7 @@
 <meta name="description" content="透明感×女性向けイラスト。挿絵・PR漫画・原画制作のご相談を受け付けています。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Zen+Maru+Gothic:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Zen+Maru+Gothic:wght@300;400;500&family=Zen+Old+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
     --kinari: #F5F0E8;
@@ -51,20 +51,49 @@
   /* ── hero ── */
   .hero {
     min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; padding: 120px 24px 60px;
+    display: flex; align-items: center;
+    padding: 120px 24px 60px;
     position: relative; overflow: hidden;
+    background: #fff url('img/hero.jpg') no-repeat right center;
+    background-size: contain;
   }
-  .hero::before, .hero::after {
-    content: ""; position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.45; z-index: 0;
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(to right, #fff 30%, rgba(255,255,255,0.88) 46%, rgba(255,255,255,0) 66%);
   }
-  .hero::before { width: 420px; height: 420px; background: var(--pink); top: -80px; right: -120px; }
-  .hero::after { width: 380px; height: 380px; background: var(--lavender); bottom: -100px; left: -110px; }
-  .hero > * { position: relative; z-index: 1; }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 110px;
+    background: linear-gradient(to bottom, rgba(245, 240, 232, 0), var(--kinari));
+  }
+  .hero-text {
+    position: relative; z-index: 1;
+    text-align: center; max-width: 520px; margin-left: 5vw;
+  }
   .hero .en-title { font-size: clamp(2.2rem, 6vw, 3.6rem); color: var(--charcoal); }
-  .hero .catch { margin-top: 26px; font-size: clamp(1.05rem, 3vw, 1.35rem); font-weight: 400; }
-  .hero .sub { margin-top: 14px; font-size: 0.85rem; color: var(--text-soft); }
+  .hero .catch {
+    margin-top: 30px;
+    font-family: 'Zen Old Mincho', serif;
+    font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 500;
+    letter-spacing: 0.16em; color: var(--charcoal);
+  }
+  .hero .sub {
+    margin-top: 18px;
+    font-family: 'Zen Old Mincho', serif;
+    font-size: 0.88rem; letter-spacing: 0.14em; color: var(--text-soft);
+  }
   .hero .bubble { font-size: 1.2rem; margin-top: 30px; }
+  .hero-img-sp { display: none; }
+  @media (max-width: 760px) {
+    .hero {
+      min-height: 0;
+      flex-direction: column; justify-content: flex-start;
+      padding: 110px 0 0;
+      background-image: none;
+    }
+    .hero::before { display: none; }
+    .hero-text { margin: 0 auto; padding: 0 24px; }
+    .hero-img-sp { display: block; width: 100%; margin-top: 28px; }
+  }
 
   /* ── sections ── */
   section { max-width: 960px; margin: 0 auto; padding: 90px 24px; }
@@ -91,6 +120,11 @@
   .work.p3 { background: linear-gradient(150deg, #fff 0%, #E9E5F2 60%, var(--lavender) 130%); }
   .work .ph { font-size: 1.6rem; opacity: 0.55; }
   .work .ph-note { font-size: 0.72rem; color: var(--text-soft); margin-top: 8px; }
+  .work .art {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .work .art.top { object-position: center top; }
   .work .cap {
     position: absolute; bottom: 0; left: 0; right: 0;
     font-size: 0.72rem; padding: 8px; color: var(--charcoal);
@@ -102,6 +136,26 @@
     background: var(--charcoal); color: var(--kinari);
     padding: 3px 10px; border-radius: 999px;
   }
+  .work:has(.art) { cursor: zoom-in; }
+
+  /* ── lightbox ── */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    display: none; justify-content: center; align-items: center;
+    padding: 4vmin;
+    background: rgba(43, 40, 38, 0.92);
+    cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: 100%; max-height: 100%;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
+  .lightbox .lb-close {
+    position: absolute; top: 12px; right: 22px;
+    font-size: 2rem; line-height: 1; color: rgba(255,255,255,0.85);
+  }
 
   /* ── profile ── */
   .profile { background: #fff; }
@@ -111,7 +165,9 @@
     background: linear-gradient(140deg, var(--pink), var(--lavender));
     display: flex; justify-content: center; align-items: center;
     font-size: 2rem; color: #fff;
+    overflow: hidden;
   }
+  .face img { width: 100%; height: 100%; object-fit: cover; }
   .profile-text p { font-size: 0.9rem; margin-bottom: 12px; }
   .profile-text .name { font-size: 1.15rem; font-weight: 500; margin-bottom: 16px; }
 
@@ -125,6 +181,18 @@
   }
   .btn.alt { background: var(--lavender); }
   .btn:hover { opacity: 0.82; }
+  .form-lead { margin-top: 48px; font-size: 0.85rem; color: var(--text-soft); }
+  .contact-form { max-width: 520px; margin: 18px auto 0; text-align: left; }
+  .contact-form .field { margin-bottom: 18px; }
+  .contact-form label { display: block; font-size: 0.8rem; margin-bottom: 6px; color: var(--text-soft); }
+  .contact-form input, .contact-form textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--greige); border-radius: 10px;
+    background: #fff; font-family: inherit; font-size: 0.9rem; color: var(--charcoal);
+  }
+  .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--pink); }
+  .contact-form button { border: none; cursor: pointer; display: block; margin: 6px auto 0; }
+  .hidden-field { display: none; }
 
   footer {
     text-align: center; padding: 40px 20px 50px;
@@ -153,10 +221,13 @@
 </header>
 
 <div class="hero" id="top">
-  <div class="en en-title">chiiko illust</div>
-  <div class="catch">見るたび、心がはずむ。</div>
-  <div class="sub">透明感 × 女性向けイラスト｜挿絵・PR漫画・原画</div>
-  <div class="bubble">🫧</div>
+  <div class="hero-text">
+    <div class="en en-title">chiiko illust</div>
+    <div class="catch">見るたび、心がはずむ。</div>
+    <div class="sub">透明感 × 女性向けイラスト｜挿絵・PR漫画・原画</div>
+    <div class="bubble">🫧</div>
+  </div>
+  <img class="hero-img-sp" src="img/hero.jpg" alt="窓辺で香水をつける女性のイラスト">
 </div>
 
 <section id="works">
@@ -165,23 +236,23 @@
 
   <div class="cat-label pink">挿絵・イラスト制作</div>
   <div class="grid">
-    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵1<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
-    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵2<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
-    <div class="work p2"><span class="ph">🎨</span><span class="ph-note">挿絵3<br>（画像あとで入れ替え）</span><span class="cap">〇〇さま｜△△の挿絵</span></div>
+    <div class="work p2"><img class="art" src="img/illust_summer.jpg" data-full="img/wm/illust_summer.jpg" alt="サマーバケーションのグッズ用イラスト"><span class="cap">企業さま｜グッズ用イラスト（ポストカード）</span></div>
+    <div class="work p2"><img class="art" src="img/illust_thankyou.jpg" data-full="img/wm/illust_thankyou.jpg" alt="チューリップを持つ女性のサンクスカード"><span class="cap">企業さま｜グッズ用イラスト（サンクスカード）</span></div>
+    <div class="work p2"><img class="art top" src="img/illust_calendar.jpg" data-full="img/wm/illust_calendar.jpg" alt="4月5月のカレンダーイラスト"><span class="cap">オリジナル｜カレンダーイラスト</span></div>
+    <div class="work p2"><img class="art" src="img/genga_drink.jpg" data-full="img/wm/genga_drink.jpg" alt="ドリンクを飲む女の子のイラスト"><span class="cap">オリジナル｜カットイラスト</span></div>
+    <div class="work p2"><img class="art" src="img/genga_bath.jpg" data-full="img/wm/genga_bath.jpg" alt="バスタイムの女性のイラスト"><span class="cap">オリジナル｜カットイラスト</span></div>
   </div>
 
   <div class="cat-label">原画・展示</div>
   <div class="grid">
-    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画1<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
-    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画2<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
-    <div class="work"><span class="sold en">SOLD</span><span class="ph">🖼</span><span class="ph-note">原画3<br>（画像あとで入れ替え）</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
+    <div class="work"><img class="art top" src="img/genga_mock1.jpg" data-full="img/wm/genga_mock1.jpg" alt="サングラスの女性の原画（額装）"><span class="sold en">SOLD</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
+    <div class="work"><img class="art top" src="img/genga_mock2.jpg" data-full="img/wm/genga_mock2.jpg" alt="水彩の女性の原画（額装）"><span class="sold en">SOLD</span><span class="cap">グループ展 ai gallery（2026.6）</span></div>
   </div>
 
   <div class="cat-label lav">漫画・PR漫画</div>
   <div class="grid">
-    <div class="work p3"><span class="ph">💭</span><span class="ph-note">4コマ1<br>（画像あとで入れ替え）</span><span class="cap">共感4コマ</span></div>
-    <div class="work p3"><span class="ph">💭</span><span class="ph-note">4コマ2<br>（画像あとで入れ替え）</span><span class="cap">共感4コマ</span></div>
-    <div class="work p3"><span class="ph">📖</span><span class="ph-note">PR漫画 2P<br>（画像あとで入れ替え）</span><span class="cap">PR漫画サンプル</span></div>
+    <div class="work p3"><img class="art top" src="img/manga_monday.jpg" data-full="img/wm/manga_monday.jpg" alt="共感4コマ「月よう日」"><span class="cap">共感4コマ「月よう日」</span></div>
+    <div class="work p3"><img class="art top" src="img/manga_beautysearch.jpg" data-full="img/wm/manga_beautysearch.jpg" alt="PR漫画サンプル「Beauty Search」"><span class="cap">PR漫画サンプル</span></div>
   </div>
 </section>
 
@@ -189,7 +260,7 @@
   <h2 class="sec-title en">PROFILE</h2>
   <p class="sec-sub">プロフィール</p>
   <div class="profile-inner">
-    <div class="face">🫧</div>
+    <div class="face"><img src="img/icon.jpg" alt="ちいこのアイコン"></div>
     <div class="profile-text">
       <p class="name">ちいこ<span class="en" style="font-size:0.85rem; margin-left:10px;">/ chiiko</span></p>
       <p>大阪を拠点に活動するイラストレーター。水彩・アナログ画材とデジタルの両方で、透明感のある女の子や日常の小さなときめきを描いています。</p>
@@ -203,7 +274,25 @@
   <p class="sec-sub">おしごとのご相談</p>
   <p>挿絵・PR漫画・イラスト制作のご依頼やご相談は、下記よりお気軽にご連絡ください。ご依頼内容・希望納期・ご予算の目安を添えていただけるとスムーズです。</p>
   <a class="btn" href="https://www.instagram.com/chiikoillust/" target="_blank" rel="noopener">Instagram DMで相談する</a>
-  <a class="btn alt" href="#" onclick="alert('公開時にフォームかメールを設定します'); return false;">メールで相談する（準備中）</a>
+
+  <p class="form-lead">✉️ メールフォームからのご相談はこちら</p>
+  <form name="contact" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+    <input type="hidden" name="form-name" value="contact">
+    <p class="hidden-field"><label>こちらは入力しないでください<input name="bot-field"></label></p>
+    <div class="field">
+      <label for="cf-name">お名前</label>
+      <input id="cf-name" type="text" name="name" required>
+    </div>
+    <div class="field">
+      <label for="cf-email">メールアドレス</label>
+      <input id="cf-email" type="email" name="email" required>
+    </div>
+    <div class="field">
+      <label for="cf-msg">ご相談内容</label>
+      <textarea id="cf-msg" name="message" rows="6" required placeholder="ご依頼内容・希望納期・ご予算の目安など"></textarea>
+    </div>
+    <button type="submit" class="btn alt">送信する</button>
+  </form>
 </section>
 
 <footer>
@@ -211,5 +300,25 @@
   <div>© 2026 chiiko</div>
 </footer>
 
+<div class="lightbox" id="lightbox">
+  <span class="lb-close">×</span>
+  <img src="" alt="拡大表示">
+</div>
+
+<script>
+  const lb = document.getElementById('lightbox');
+  const lbImg = lb.querySelector('img');
+  document.querySelectorAll('.work .art').forEach(img => {
+    img.closest('.work').addEventListener('click', () => {
+      lbImg.src = img.dataset.full || img.src;
+      lbImg.alt = img.alt;
+      lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click', () => { lb.classList.remove('open'); lbImg.src = ''; });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { lb.classList.remove('open'); lbImg.src = ''; }
+  });
+</script>
 </body>
 </html>
